@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Blend for Visual Studio 14
+# Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TV.Core", "TV.Core\TV.Core.csproj", "{00BC0114-1A43-48C4-94AF-2A513B6E9605}"
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TV.Model", "TV.Model\TV.Model.csproj", "{C09B8B6F-DF47-469C-A19C-8C2731F6C2C8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TV.Tiskarna", "TV.Tiskarna\TV.Tiskarna.csproj", "{8FD923C7-FD64-4989-A8AB-EB426753235B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TV.TiskarnaApp", "TV.TiskarnaApp\TV.TiskarnaApp.csproj", "{80F61CFD-1366-4438-B4D0-8D2501893510}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +60,12 @@ Global
 		{8FD923C7-FD64-4989-A8AB-EB426753235B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8FD923C7-FD64-4989-A8AB-EB426753235B}.Test|Any CPU.ActiveCfg = Release|Any CPU
 		{8FD923C7-FD64-4989-A8AB-EB426753235B}.Test|Any CPU.Build.0 = Release|Any CPU
+		{80F61CFD-1366-4438-B4D0-8D2501893510}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80F61CFD-1366-4438-B4D0-8D2501893510}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80F61CFD-1366-4438-B4D0-8D2501893510}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80F61CFD-1366-4438-B4D0-8D2501893510}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80F61CFD-1366-4438-B4D0-8D2501893510}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{80F61CFD-1366-4438-B4D0-8D2501893510}.Test|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
