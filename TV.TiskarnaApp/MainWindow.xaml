@@ -29,9 +29,25 @@
                 <ColumnDefinition Width="3" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <TextBlock FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap">Left side</TextBlock>
+
+            <StackPanel>
+                <Expander Header="Zakázky">
+                    <StackPanel Margin="10,4,0,0">
+                        <Label Margin="4" Content="Nová zakázka" />
+                        <Label Margin="4" Content="Upravit zakázku" />
+                    </StackPanel>
+                </Expander>
+
+                <Expander Header="Přehled zakázek">
+                    <StackPanel Margin="10,4,0,0">
+                        <Label Margin="4" Content="Datum vyhotovení" />
+                        <Label Margin="4" Content="Fáze" />
+                    </StackPanel>
+                </Expander>
+            </StackPanel>
+
+
             <GridSplitter Grid.Column="1" Width="3" HorizontalAlignment="Stretch" />
-            <TextBlock Grid.Column="2" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap">Right side</TextBlock>
         </Grid>
     </DockPanel>
 </Window>
