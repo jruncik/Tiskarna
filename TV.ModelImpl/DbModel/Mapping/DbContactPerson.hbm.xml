@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="TV.ModelImpl"
+                   namespace="TV.ModelImpl.DbModel">
+
+  <class name="DbContactPerson" table="ContactPersons">
+    <id name="Id">
+      <generator class="guid" />
+    </id>
+    <property name="FirstName" not-null="true" />
+    <property name="LastName" />
+    <property name="PhoneNumber" />
+    <property name="Email" />
+  </class>
+</hibernate-mapping>
