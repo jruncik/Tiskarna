@@ -62,6 +62,8 @@
             this.radioButtonPohoda = new System.Windows.Forms.RadioButton();
             this.groupBoxPriorita = new System.Windows.Forms.GroupBox();
             this.groupBoxDokoncovaciPrace = new System.Windows.Forms.GroupBox();
+            this.labelJineDokonceni = new System.Windows.Forms.Label();
+            this.comboBoxJineDokonceni = new System.Windows.Forms.ComboBox();
             this.checkBoxLaminace = new System.Windows.Forms.CheckBox();
             this.checkBoxSiti = new System.Windows.Forms.CheckBox();
             this.checkBoxLepeni = new System.Windows.Forms.CheckBox();
@@ -71,8 +73,6 @@
             this.checkBoxPerforace = new System.Windows.Forms.CheckBox();
             this.checkBoxFalcovani = new System.Windows.Forms.CheckBox();
             this.checkBoxCislovani = new System.Windows.Forms.CheckBox();
-            this.comboBoxJineDokonceni = new System.Windows.Forms.ComboBox();
-            this.labelJineDokonceni = new System.Windows.Forms.Label();
             this.labelPoznamka = new System.Windows.Forms.Label();
             this.textBoxPoznamky = new System.Windows.Forms.TextBox();
             this.comboBoxKontaktniOsoba = new System.Windows.Forms.ComboBox();
@@ -305,19 +305,20 @@
             // checkBoxKorektura
             // 
             this.checkBoxKorektura.AutoSize = true;
-            this.checkBoxKorektura.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxKorektura.Location = new System.Drawing.Point(7, 480);
+            this.checkBoxKorektura.Location = new System.Drawing.Point(11, 479);
             this.checkBoxKorektura.Name = "checkBoxKorektura";
             this.checkBoxKorektura.Size = new System.Drawing.Size(72, 17);
             this.checkBoxKorektura.TabIndex = 15;
             this.checkBoxKorektura.Text = "Korektura";
             this.checkBoxKorektura.UseVisualStyleBackColor = true;
+            this.checkBoxKorektura.CheckedChanged += new System.EventHandler(this.checkBoxKorektura_CheckedChanged);
             // 
             // dateTimePickerKorektura
             // 
+            this.dateTimePickerKorektura.Enabled = false;
             this.dateTimePickerKorektura.Location = new System.Drawing.Point(115, 474);
             this.dateTimePickerKorektura.Name = "dateTimePickerKorektura";
-            this.dateTimePickerKorektura.Size = new System.Drawing.Size(199, 20);
+            this.dateTimePickerKorektura.Size = new System.Drawing.Size(229, 20);
             this.dateTimePickerKorektura.TabIndex = 16;
             // 
             // labelObjednano
@@ -333,14 +334,14 @@
             // 
             this.dateTimePickerObjednano.Location = new System.Drawing.Point(115, 448);
             this.dateTimePickerObjednano.Name = "dateTimePickerObjednano";
-            this.dateTimePickerObjednano.Size = new System.Drawing.Size(199, 20);
+            this.dateTimePickerObjednano.Size = new System.Drawing.Size(229, 20);
             this.dateTimePickerObjednano.TabIndex = 14;
             // 
             // dateTimePickerZhotoveno
             // 
             this.dateTimePickerZhotoveno.Location = new System.Drawing.Point(114, 500);
             this.dateTimePickerZhotoveno.Name = "dateTimePickerZhotoveno";
-            this.dateTimePickerZhotoveno.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePickerZhotoveno.Size = new System.Drawing.Size(230, 20);
             this.dateTimePickerZhotoveno.TabIndex = 17;
             // 
             // labelZhotoveno
@@ -359,7 +360,6 @@
             this.radioButtonIhned.Name = "radioButtonIhned";
             this.radioButtonIhned.Size = new System.Drawing.Size(52, 17);
             this.radioButtonIhned.TabIndex = 19;
-            this.radioButtonIhned.TabStop = true;
             this.radioButtonIhned.Text = "Ihned";
             this.radioButtonIhned.UseVisualStyleBackColor = true;
             // 
@@ -370,13 +370,13 @@
             this.radioButtonCoNejdrive.Name = "radioButtonCoNejdrive";
             this.radioButtonCoNejdrive.Size = new System.Drawing.Size(81, 17);
             this.radioButtonCoNejdrive.TabIndex = 20;
-            this.radioButtonCoNejdrive.TabStop = true;
             this.radioButtonCoNejdrive.Text = "Co nejdříve";
             this.radioButtonCoNejdrive.UseVisualStyleBackColor = true;
             // 
             // radioButtonPohoda
             // 
             this.radioButtonPohoda.AutoSize = true;
+            this.radioButtonPohoda.Checked = true;
             this.radioButtonPohoda.Location = new System.Drawing.Point(16, 65);
             this.radioButtonPohoda.Name = "radioButtonPohoda";
             this.radioButtonPohoda.Size = new System.Drawing.Size(62, 17);
@@ -419,6 +419,25 @@
             this.groupBoxDokoncovaciPrace.TabIndex = 22;
             this.groupBoxDokoncovaciPrace.TabStop = false;
             this.groupBoxDokoncovaciPrace.Text = "Dokončovací práce";
+            // 
+            // labelJineDokonceni
+            // 
+            this.labelJineDokonceni.AutoSize = true;
+            this.labelJineDokonceni.Location = new System.Drawing.Point(6, 69);
+            this.labelJineDokonceni.Name = "labelJineDokonceni";
+            this.labelJineDokonceni.Size = new System.Drawing.Size(26, 13);
+            this.labelJineDokonceni.TabIndex = 30;
+            this.labelJineDokonceni.Text = "Jiné";
+            // 
+            // comboBoxJineDokonceni
+            // 
+            this.comboBoxJineDokonceni.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxJineDokonceni.FormattingEnabled = true;
+            this.comboBoxJineDokonceni.Location = new System.Drawing.Point(59, 66);
+            this.comboBoxJineDokonceni.Name = "comboBoxJineDokonceni";
+            this.comboBoxJineDokonceni.Size = new System.Drawing.Size(510, 21);
+            this.comboBoxJineDokonceni.TabIndex = 23;
             // 
             // checkBoxLaminace
             // 
@@ -469,7 +488,6 @@
             this.checkBoxBigovani.TabIndex = 4;
             this.checkBoxBigovani.Text = "Bigování";
             this.checkBoxBigovani.UseVisualStyleBackColor = true;
-            this.checkBoxBigovani.CheckedChanged += new System.EventHandler(this.checkBoxBigovani_CheckedChanged);
             // 
             // checkBoxVysek
             // 
@@ -512,25 +530,6 @@
             this.checkBoxCislovani.Text = "Číslování";
             this.checkBoxCislovani.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.checkBoxCislovani.UseVisualStyleBackColor = true;
-            // 
-            // comboBoxJineDokonceni
-            // 
-            this.comboBoxJineDokonceni.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxJineDokonceni.FormattingEnabled = true;
-            this.comboBoxJineDokonceni.Location = new System.Drawing.Point(59, 66);
-            this.comboBoxJineDokonceni.Name = "comboBoxJineDokonceni";
-            this.comboBoxJineDokonceni.Size = new System.Drawing.Size(510, 21);
-            this.comboBoxJineDokonceni.TabIndex = 23;
-            // 
-            // labelJineDokonceni
-            // 
-            this.labelJineDokonceni.AutoSize = true;
-            this.labelJineDokonceni.Location = new System.Drawing.Point(6, 69);
-            this.labelJineDokonceni.Name = "labelJineDokonceni";
-            this.labelJineDokonceni.Size = new System.Drawing.Size(26, 13);
-            this.labelJineDokonceni.TabIndex = 30;
-            this.labelJineDokonceni.Text = "Jiné";
             // 
             // labelPoznamka
             // 
