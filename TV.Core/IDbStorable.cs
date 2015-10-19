@@ -4,5 +4,6 @@ namespace TV.Core
     {
         void Save();
         void Reload();
+        void Delete();
     }
 }

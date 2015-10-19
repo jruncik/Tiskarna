@@ -9,14 +9,14 @@ namespace TV.CoreImpl.Users
 {
     internal class User : IUser
     {
+        public User() :
+            this(new DbUser())
+        {
+        }
+
         public User(DbUser dbUser)
         {
             _dbUser = dbUser;
-        }
-
-        public User():
-            this(new DbUser())
-        {
         }
 
         public User(String username, String password) :
@@ -102,7 +102,7 @@ namespace TV.CoreImpl.Users
             }
         }
 
-        internal void Delete()
+        public void Delete()
         {
             using (AppliactionContext.Log.LogTime(this, String.Format("Delete user '{0}'.", Username)))
             {

@@ -37,12 +37,17 @@ namespace TV.ModelImpl.Model.PaperFormats
 
         public void Save()
         {
-            throw new InvalidOperationException();
+            throw new NotImplementedException();
         }
 
         public void Reload()
         {
-            throw new InvalidOperationException();
+            throw new NotImplementedException();
+        }
+
+        public void Delete()
+        {
+            throw new NotImplementedException();
         }
 
         private readonly string _name;

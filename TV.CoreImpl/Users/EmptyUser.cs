@@ -38,5 +38,9 @@ namespace TV.CoreImpl.Users
         public void Reload()
         {
         }
+
+        public void Delete()
+        {
+        }
     }
 }

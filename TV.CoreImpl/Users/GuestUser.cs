@@ -39,6 +39,10 @@ namespace TV.CoreImpl.Users
         {
         }
 
+        public void Delete()
+        {
+        }
+
         private const string GUEST_USERNAME = "Guest";
         private const string GUEST_PASSWORD = "guest";
     }

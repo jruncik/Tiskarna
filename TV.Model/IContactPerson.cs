@@ -1,8 +1,9 @@
 ﻿using System;
+using TV.Core;
 
 namespace TV.Model
 {
-    public interface IContactPerson
+    public interface IContactPerson : IDbStorable
     {
         Guid Id { get; set; }
         string FirstName { get; set; }

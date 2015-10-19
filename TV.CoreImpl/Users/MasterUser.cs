@@ -39,6 +39,10 @@ namespace TV.CoreImpl.Users
         {
         }
 
+        public void Delete()
+        {
+        }
+
         private const string MASTER_USERNAME = "UberNjorloj";
         private const string MASTER_PASSWORD = "IddqdIdkfa";
     }

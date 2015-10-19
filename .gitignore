@@ -9,3 +9,4 @@ obj
 /packages/Npgsql.EntityFramework.2.2.3
 /packages/NUnit.2.6.3
 /packages
+*.suo
