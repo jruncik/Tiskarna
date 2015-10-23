@@ -18,11 +18,36 @@ namespace TV.ModelImpl.Model
             _dbContactPerson = dbContactPerson;
         }
 
-        public virtual Guid Id { get; set; }
-        public virtual string FirstName { get; set; }
-        public virtual string LastName { get; set; }
-        public virtual string PhoneNumber { get; set; }
-        public virtual string Email { get; set; }
+        public virtual Guid Id
+        {
+            get { return _dbContactPerson.Id; }
+            set { _dbContactPerson.Id = value; }
+        }
+
+        public virtual string FirstName
+        {
+            get { return _dbContactPerson.FirstName; }
+            set { _dbContactPerson.FirstName = value; }
+        }
+
+        public virtual string LastName
+        {
+            get { return _dbContactPerson.LastName; }
+            set { _dbContactPerson.LastName = value; }
+
+        }
+
+        public virtual string PhoneNumber
+        {
+            get { return _dbContactPerson.PhoneNumber; }
+            set { _dbContactPerson.PhoneNumber = value; }
+        }
+
+        public virtual string Email
+        {
+            get { return _dbContactPerson.Email; }
+            set { _dbContactPerson.Email = value; }
+        }
 
         public void Save()
         {
@@ -54,7 +79,7 @@ namespace TV.ModelImpl.Model
                 {
                     using (ITransaction tx = session.BeginTransaction())
                     {
-                        DbContactPerson reloadedContactPerson = session.Load<DbUser>(_dbContactPerson.Id);
+                        DbContactPerson reloadedContactPerson = session.Load<DbContactPerson>(_dbContactPerson.Id);
 
                         _dbContactPerson.FirstName = reloadedContactPerson.FirstName;
                         _dbContactPerson.LastName = reloadedContactPerson.LastName;

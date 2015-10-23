@@ -34,20 +34,20 @@ namespace TV.CoreImpl.Users
 
         public Guid Id
         {
-            get { return DbUser.Id; }
-            set { DbUser.Id = value; }
+            get { return _dbUser.Id; }
+            set { _dbUser.Id = value; }
         }
 
         public string Username
         {
-            get { return DbUser.Username; }
-            set { DbUser.Username = value; }
+            get { return _dbUser.Username; }
+            set { _dbUser.Username = value; }
         }
 
         public string Password
         {
-            get { return DbUser.Password; }
-            set { DbUser.Password = value; }
+            get { return _dbUser.Password; }
+            set { _dbUser.Password = value; }
         }
 
         internal DbUser DbUser

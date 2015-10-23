@@ -4,7 +4,7 @@
                    assembly="TV.ModelImpl"
                    namespace="TV.ModelImpl.DbModel">
 
-  <class name="DbUser" table="Users">
+  <class name="DbUser" table="users">
     <id name="Id" column="id">
       <generator class="guid" />
     </id>

@@ -5,12 +5,12 @@
                    namespace="TV.ModelImpl.DbModel">
 
   <class name="DbContactPerson" table="ContactPersons">
-    <id name="Id">
+    <id name="Id" column="id">
       <generator class="guid" />
     </id>
-    <property name="FirstName" not-null="true" />
-    <property name="LastName" />
-    <property name="PhoneNumber" />
-    <property name="Email" />
+    <property name="FirstName" column="firstname" not-null="true" />
+    <property name="LastName" column="lastname" />
+    <property name="PhoneNumber" column="phonenumber" />
+    <property name="Email" column="email" />
   </class>
 </hibernate-mapping>
