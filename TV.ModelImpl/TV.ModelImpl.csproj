@@ -59,6 +59,7 @@
     <Compile Include="DbModel\DbContactPerson.cs" />
     <Compile Include="DbModel\DbPaperFormat.cs" />
     <Compile Include="DbModel\DbRights.cs" />
+    <Compile Include="Model\FinishingJobFlags.cs" />
     <Compile Include="Model\PaperFormats\PaperFormatBuildin.cs" />
     <Compile Include="Model\ContactPerson.cs" />
     <Compile Include="Model\FinishingJob.cs" />
