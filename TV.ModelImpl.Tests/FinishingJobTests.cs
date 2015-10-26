@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using TV.ModelImpl.Model;
+using TV.Tiskarna;
 
 namespace TV.ModelImpl.Tests
 {
@@ -70,6 +71,18 @@ namespace TV.ModelImpl.Tests
             TestSingleFlag(finishingJob, FinishingJobFlag.Lamination, () => finishingJob.Lamination, value => finishingJob.Lamination = value);
         }
 
+        [Test]
+        public void TestSaveDelet()
+        {
+            FinishingJob finishingJob = new FinishingJob();
+            finishingJob.Numbering = true;
+            finishingJob.Assembling = true;
+            finishingJob.Other = "Jine zpracovani";
+
+            finishingJob.Save();
+            finishingJob.Delete();
+        }
+
         private static void TestSingleFlag(FinishingJob finishingJob, FinishingJobFlag testFlag, Func<bool> getFlag, Action<bool> setFlag)
         {
             Assert.IsFalse(getFlag());
@@ -83,5 +96,34 @@ namespace TV.ModelImpl.Tests
             Assert.IsFalse(getFlag());
             Assert.AreEqual(FinishingJobFlag.None, finishingJob.Flags);
         }
+
+        #region Tests Initialization
+
+        [SetUp]
+        public void TestInit()
+        {
+            new TiskarnaVosahlo();
+        }
+
+        [TearDown]
+        public void TestCleanup()
+        {
+        }
+
+        [TestFixtureSetUp]
+        public void AllTestsInit()
+        {
+        }
+
+        [TestFixtureTearDown]
+        public void AllTestCleanup()
+        {
+        }
+
+        #endregion
+
+        private const string MASTER_USERNAME = "UberNjorloj";
+        private const string MASTER_PASSWORD = "IddqdIdkfa";
     }
 }
+

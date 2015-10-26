@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IContactPerson.cs" />
+    <Compile Include="IFinishingJob.cs" />
     <Compile Include="IPaperFormats.cs" />
     <Compile Include="IPaperFormat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
