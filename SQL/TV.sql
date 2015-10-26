@@ -51,3 +51,12 @@ CREATE TABLE public.contactpersons (
 ) 
 WITH (oids = false);
 COMMIT;
+
+CREATE TABLE public.finishingjob (
+  id UUID NOT NULL,
+  flags INTEGER NOT NULL,
+  other VARCHAR(511),
+  CONSTRAINT finishingjob_pkey PRIMARY KEY(id)
+) 
+WITH (oids = false);
+COMMIT;
