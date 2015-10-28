@@ -51,33 +51,36 @@ namespace TV.ModelImpl.Model
 
         public void Save()
         {
-            using (AppliactionContext.Log.LogTime(this, String.Format("Save contact persone '{0} {1}'.", FirstName, LastName)))
+            using (ISession session = UserContext.SessionFactory.OpenSession())
             {
-                using (ISession session = UserContext.SessionFactory.OpenSession())
+                using (ITransaction tx = session.BeginTransaction())
                 {
-                    using (ITransaction tx = session.BeginTransaction())
+                    if (Id == Guid.Empty)
                     {
-                        if (Id == Guid.Empty)
+                        using (AppliactionContext.Log.LogTime(this, String.Format("Save contact persone '{0} {1}'.", FirstName, LastName)))
                         {
                             session.Save(_dbContactPerson);
                         }
-                        else
+                    }
+                    else
+                    {
+                        using (AppliactionContext.Log.LogTime(this, String.Format("Update contact persone '{0} {1}'.", FirstName, LastName)))
                         {
                             session.Update(_dbContactPerson);
                         }
-                        tx.Commit();
                     }
+                    tx.Commit();
                 }
             }
         }
 
         public void Reload()
         {
-            using (AppliactionContext.Log.LogTime(this, String.Format("Reload contact person '{0} {1}'.", FirstName, LastName)))
+            using (ISession session = UserContext.SessionFactory.OpenSession())
             {
-                using (ISession session = UserContext.SessionFactory.OpenSession())
+                using (ITransaction tx = session.BeginTransaction())
                 {
-                    using (ITransaction tx = session.BeginTransaction())
+                    using (AppliactionContext.Log.LogTime(this, String.Format("Reload contact person '{0} {1}'.", FirstName, LastName)))
                     {
                         DbContactPerson reloadedContactPerson = session.Load<DbContactPerson>(_dbContactPerson.Id);
 
@@ -86,21 +89,22 @@ namespace TV.ModelImpl.Model
                         _dbContactPerson.PhoneNumber = reloadedContactPerson.PhoneNumber;
                         _dbContactPerson.Email = reloadedContactPerson.Email;
                     }
+                    tx.Commit();
                 }
             }
         }
 
         public void Delete()
         {
-            using (AppliactionContext.Log.LogTime(this, String.Format("Delete contact person '{0} {1}'.", FirstName, LastName)))
+            using (ISession session = UserContext.SessionFactory.OpenSession())
             {
-                using (ISession session = UserContext.SessionFactory.OpenSession())
+                using (ITransaction tx = session.BeginTransaction())
                 {
-                    using (ITransaction tx = session.BeginTransaction())
+                    using (AppliactionContext.Log.LogTime(this, String.Format("Delete contact person '{0} {1}'.", FirstName, LastName)))
                     {
                         session.Delete(_dbContactPerson);
-                        tx.Commit();
                     }
+                    tx.Commit();
                 }
             }
         }

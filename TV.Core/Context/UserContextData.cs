@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Security.Principal;
 using NHibernate;
+using NHibernate.Stat;
 using TV.Core.Rights;
 using TV.Core.Users;
 
@@ -72,6 +73,9 @@ namespace TV.Core.Context
         public void Logout()
         {
             Debug.Assert(_originalPrincipal == null, "Context has to be detached from thread");
+
+            _sessionFactory.Close();
+            _sessionFactory.Dispose();
 
             _sessionId = SessionId.Empty;
             IsAuthenticated = false;
