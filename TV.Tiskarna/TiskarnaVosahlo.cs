@@ -32,9 +32,8 @@ namespace TV.Tiskarna
 
             Configuration configuartion = new Configuration();
             configuartion.Configure();
-            ISessionFactory sessionFactory = configuartion.BuildSessionFactory();
 
-            new AppliactionContext(log, sessionFactory);
+            new AppliactionContext(log, configuartion);
         }
 
         private static void InitUserContext()

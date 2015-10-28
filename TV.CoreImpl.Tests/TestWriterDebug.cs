@@ -4,7 +4,7 @@ namespace TV.CoreImpl.Tests
 {
     public class LogWriterTest : ILogWriter
     {
-        public void WriteMessage(string logMessage)
+        public void WriteMessage(string logMessage, LogLevel level)
         {
             IsMessageLogged = true;
         }

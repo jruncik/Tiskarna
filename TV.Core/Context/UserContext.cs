@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Security.Principal;
 using System.Threading;
 using System.Web;
+using NHibernate;
 using TV.Core.Rights;
 using TV.Core.Users;
 
@@ -43,9 +44,24 @@ namespace TV.Core.Context
                 UserContextData context = Instance.ContextData;
                 if (context == null)
                 {
+                    AppliactionContext.Log.Error(null, "Calling user context functionality without any logged user.");
                     return null;
                 }
                 return context.User;
+            }
+        }
+
+        public static ISessionFactory SessionFactory
+        {
+            get
+            {
+                UserContextData context = Instance.ContextData;
+                if (context == null)
+                {
+                    AppliactionContext.Log.Error(null, "Calling user context functionality without any logged user.");
+                    return null;
+                }
+                return context.SessionFactory;
             }
         }
 
@@ -56,6 +72,7 @@ namespace TV.Core.Context
                 UserContextData context = Instance.ContextData;
                 if (context == null)
                 {
+                    // AppliactionContext.Log.Error(null, "Calling user context functionality without any logged user.");
                     return SessionId.Empty;
                 }
                 return context.SessionId;
@@ -69,6 +86,7 @@ namespace TV.Core.Context
                 UserContextData context = Instance.ContextData;
                 if (context == null)
                 {
+                    AppliactionContext.Log.Error(null, "Calling user context functionality without any logged user.");
                     return null;
                 }
                 return context;

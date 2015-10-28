@@ -2,6 +2,6 @@
 {
     public interface ILogWriter
     {
-        void WriteMessage(string logMessage);
+        void WriteMessage(string logMessage, LogLevel level);
     }
 }

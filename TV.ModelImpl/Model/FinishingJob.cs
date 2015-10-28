@@ -104,7 +104,7 @@ namespace TV.ModelImpl.Model
         {
             using (AppliactionContext.Log.LogTime(this, String.Format("Save finishing job '{0} {1}'.", Flags, Other)))
             {
-                using (ISession session = AppliactionContext.SessionFactory.OpenSession())
+                using (ISession session = UserContext.SessionFactory.OpenSession())
                 {
                     using (ITransaction tx = session.BeginTransaction())
                     {
@@ -126,7 +126,7 @@ namespace TV.ModelImpl.Model
         {
             using (AppliactionContext.Log.LogTime(this, String.Format("Reload finishing job '{0} {1}'.", Flags, Other)))
             {
-                using (ISession session = AppliactionContext.SessionFactory.OpenSession())
+                using (ISession session = UserContext.SessionFactory.OpenSession())
                 {
                     using (ITransaction tx = session.BeginTransaction())
                     {
@@ -143,7 +143,7 @@ namespace TV.ModelImpl.Model
         {
             using (AppliactionContext.Log.LogTime(this, String.Format("Delete finishing job '{0} {1}'.", Flags, Other)))
             {
-                using (ISession session = AppliactionContext.SessionFactory.OpenSession())
+                using (ISession session = UserContext.SessionFactory.OpenSession())
                 {
                     using (ITransaction tx = session.BeginTransaction())
                     {

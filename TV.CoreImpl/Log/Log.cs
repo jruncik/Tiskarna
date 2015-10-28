@@ -71,7 +71,7 @@ namespace TV.CoreImpl.Log
             string logMessage = _messageGenerator.GenerateMessag(level, sender, message);
             foreach (ILogWriter logWriter in _writers)
             {
-                logWriter.WriteMessage(logMessage);
+                logWriter.WriteMessage(logMessage, level);
             }
         }
 

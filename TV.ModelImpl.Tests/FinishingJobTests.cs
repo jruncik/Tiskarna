@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using TV.Core.Context;
 using TV.ModelImpl.Model;
 using TV.Tiskarna;
 
@@ -102,17 +103,19 @@ namespace TV.ModelImpl.Tests
         [SetUp]
         public void TestInit()
         {
-            new TiskarnaVosahlo();
+            TiskarnaVosahlo.Autentication.LogIn(MASTER_USERNAME, MASTER_PASSWORD);
         }
 
         [TearDown]
         public void TestCleanup()
         {
+            UserContext.Logout();
         }
 
         [TestFixtureSetUp]
         public void AllTestsInit()
         {
+            new TiskarnaVosahlo();
         }
 
         [TestFixtureTearDown]

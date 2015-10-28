@@ -53,7 +53,7 @@ namespace TV.ModelImpl.Model
         {
             using (AppliactionContext.Log.LogTime(this, String.Format("Save contact persone '{0} {1}'.", FirstName, LastName)))
             {
-                using (ISession session = AppliactionContext.SessionFactory.OpenSession())
+                using (ISession session = UserContext.SessionFactory.OpenSession())
                 {
                     using (ITransaction tx = session.BeginTransaction())
                     {
@@ -75,7 +75,7 @@ namespace TV.ModelImpl.Model
         {
             using (AppliactionContext.Log.LogTime(this, String.Format("Reload contact person '{0} {1}'.", FirstName, LastName)))
             {
-                using (ISession session = AppliactionContext.SessionFactory.OpenSession())
+                using (ISession session = UserContext.SessionFactory.OpenSession())
                 {
                     using (ITransaction tx = session.BeginTransaction())
                     {
@@ -94,7 +94,7 @@ namespace TV.ModelImpl.Model
         {
             using (AppliactionContext.Log.LogTime(this, String.Format("Delete contact person '{0} {1}'.", FirstName, LastName)))
             {
-                using (ISession session = AppliactionContext.SessionFactory.OpenSession())
+                using (ISession session = UserContext.SessionFactory.OpenSession())
                 {
                     using (ITransaction tx = session.BeginTransaction())
                     {

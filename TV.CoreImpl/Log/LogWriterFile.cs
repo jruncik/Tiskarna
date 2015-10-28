@@ -15,7 +15,7 @@ namespace TV.CoreImpl.Log
             _fileWriter = new Thread(WriteMessageInternal);
         }
 
-        public void WriteMessage(string logMessage)
+        public void WriteMessage(string logMessage, LogLevel level)
         {
             _messages.Enqueue(logMessage);
         }

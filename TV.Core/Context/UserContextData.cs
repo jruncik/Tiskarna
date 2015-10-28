@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Security.Principal;
+using NHibernate;
 using TV.Core.Rights;
 using TV.Core.Users;
 
@@ -13,7 +14,7 @@ namespace TV.Core.Context
             _currentUser = currentUser;
             _sessionId = sessionId;
             _rights = rights;
-
+            _sessionFactory = AppliactionContext.Configuartion.BuildSessionFactory();
             IsAuthenticated = true;
         }
 
@@ -61,6 +62,11 @@ namespace TV.Core.Context
             }
         }
 
+        public ISessionFactory SessionFactory
+        {
+            get { return _sessionFactory; }
+        }
+
         public bool IsAuthenticated { get; set; }
 
         public void Logout()
@@ -84,5 +90,6 @@ namespace TV.Core.Context
         private IRights _rights;
         private SessionId _sessionId;
         private IPrincipal _originalPrincipal;
+        private ISessionFactory _sessionFactory;
     }
 }

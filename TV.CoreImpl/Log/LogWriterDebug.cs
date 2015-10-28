@@ -5,7 +5,7 @@ namespace TV.CoreImpl.Log
 {
     internal class LogWriterDebug : ILogWriter
     {
-        public void WriteMessage(string logMessage)
+        public void WriteMessage(string logMessage, LogLevel level)
         {
             Debug.WriteLine(logMessage);
         }
