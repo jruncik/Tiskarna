@@ -60,3 +60,15 @@ CREATE TABLE public.finishingjob (
 ) 
 WITH (oids = false);
 COMMIT;
+
+CREATE TABLE "order"
+(
+  id uuid NOT NULL,
+  ordertype character varying(256) NOT NULL,
+  ordertime date NOT NULL,
+  CONSTRAINT orders_pkey PRIMARY KEY (id)
+)
+WITH (OIDS=FALSE);
+ALTER TABLE "order"
+  OWNER TO postgres;
+COMMIT;
