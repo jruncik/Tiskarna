@@ -60,6 +60,7 @@
     <Compile Include="DbModel\DbFinishingJob.cs" />
     <Compile Include="DbModel\DbOrder.cs" />
     <Compile Include="DbModel\DbPaperFormat.cs" />
+    <Compile Include="DbModel\DbProofsheet.cs" />
     <Compile Include="DbModel\DbRights.cs" />
     <Compile Include="Model\FinishingJobFlags.cs" />
     <Compile Include="Model\PaperFormats\PaperFormatBuildin.cs" />
@@ -71,7 +72,6 @@
     <Compile Include="Model\PaperFormats\PaperFormatStorable.cs" />
     <Compile Include="Model\PaperType.cs" />
     <Compile Include="Model\PrintImplementation.cs" />
-    <Compile Include="Model\Priority.cs" />
     <Compile Include="Model\Proofsheet.cs" />
     <Compile Include="DbModel\DbUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -116,6 +116,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DbModel\Mapping\DbOrder.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DbModel\DbProofsheet.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

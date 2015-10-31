@@ -41,8 +41,13 @@
   <ItemGroup>
     <Compile Include="IContactPerson.cs" />
     <Compile Include="IFinishingJob.cs" />
+    <Compile Include="IPaperType.cs" />
+    <Compile Include="IOrder.cs" />
     <Compile Include="IPaperFormats.cs" />
     <Compile Include="IPaperFormat.cs" />
+    <Compile Include="IPrintImplementation.cs" />
+    <Compile Include="IProofsheet.cs" />
+    <Compile Include="Priority.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

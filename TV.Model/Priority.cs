@@ -1,4 +1,4 @@
-﻿namespace TV.ModelImpl.Model
+﻿namespace TV.Model
 {
     public enum Priority
     {

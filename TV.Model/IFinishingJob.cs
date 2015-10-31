@@ -1,9 +1,11 @@
-﻿using TV.Core;
+﻿using System;
+using TV.Core;
 
 namespace TV.Model
 {
     public interface IFinishingJob : IDbStorable
     {
+        Guid Id { get; set; }
         bool Numbering { get; set; }
         bool Foldding { get; set; }
         bool Perforation { get; set; }

@@ -9,29 +9,28 @@ namespace TV.ModelImpl.DbModel
     public class DbOrder
     {
         public virtual Guid Id { get; set; }
-        public IContactPerson Contact { get; set; }
-        public string OrderType { get; set; }
-        public DateTime OrderTime { get; set; }
-        public DateTime FinishTime { get; set; }
-        public Priority Priority { get; set; }
-        public IPaperFormat Format { get; set; }
-        public Int32 PageCount { get; set; }
-        public Int32 Count { get; set; }
-        public Int32 QuireCount { get; set; }
-        public Color PrintColor { get; set; }
-        public PaperType PaperType { get; set; }
-        public PrintImplementation Implementation { get; set; }
-        public bool IsSpecimenSupplied { get; set; }
-        public bool IsPageCompositionSupplied { get; set; }
-        public IList<Proofsheet> Proofsheets { get; set; }
-        public FinishingJob Finishing { get; set; }
-        public string Details { get; set; }
+        public virtual IContactPerson Contact { get; set; }
+        public virtual string OrderType { get; set; }
+        public virtual DateTime OrderTime { get; set; }
+        public virtual DateTime FinishTime { get; set; }
+        public virtual Priority Priority { get; set; }
+        public virtual IPaperFormat Format { get; set; }
+        public virtual Int32 PageCount { get; set; }
+        public virtual Int32 Count { get; set; }
+        public virtual Int32 QuireCount { get; set; }
+        public virtual Color PrintColor { get; set; }
+        public virtual PaperType PaperType { get; set; }
+        public virtual PrintImplementation Implementation { get; set; }
+        public virtual bool IsSpecimenSupplied { get; set; }
+        public virtual bool IsPageCompositionSupplied { get; set; }
+        public virtual IList<Proofsheet> Proofsheets { get; set; }
+        public virtual FinishingJob Finishing { get; set; }
+        public virtual string Details { get; set; }
 
         public DbOrder()
         {
             Id = Guid.Empty;
-            OrderType = DateTime.Now;
+            OrderTime = DateTime.Now;
         }
-
     }
 }
