@@ -68,7 +68,16 @@ CREATE TABLE "order"
   ordertime date NOT NULL,
   CONSTRAINT orders_pkey PRIMARY KEY (id)
 )
-WITH (OIDS=FALSE);
+WITH (oids=false);
+COMMIT;
+
+CREATE TABLE public.papertype (
+  id UUID NOT NULL,
+  color INTEGER NOT NULL,
+  type VARCHAR(256),
+  PRIMARY KEY(id)
+) 
+WITH (oids = false);
 COMMIT;
 
 CREATE TABLE public."order" (

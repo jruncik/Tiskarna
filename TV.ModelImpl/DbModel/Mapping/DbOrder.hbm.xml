@@ -8,7 +8,22 @@
     <id name="Id" column="id">
       <generator class="guid" />
     </id>
+    <property name="Contact" column="contact" not-null="true" />
     <property name="OrderType" column="ordertype" not-null="true" />
     <property name="OrderTime" column="ordertime" not-null="true" />
+    <property name="FinishTime" column="finishtime" not-null="true" />
+    <property name="Priority" column="priority" not-null="true" />
+    <property name="Format" column="format" not-null="true" />
+    <property name="PageCount" column="pagecount" />
+    <property name="Count" column="count" not-null="true" />
+    <property name="QuireCount" column="quirecount" />
+    <property name="PrintColor" column="printcolor" />
+    <property name="PaperType" column="papertype" />
+    <property name="Implementation" column="implementation" />
+    <property name="IsSpecimenSupplied" column="isspecimensupplied" />
+    <property name="IsPageCompositionSupplied" column="ispagecompositionsupplied" />
+    <property name="Proofsheet" column="proofsheet" />
+    <property name="Finishing" column="finishing" />
+    <property name="Details" column="details" />
    </class>
 </hibernate-mapping>

@@ -60,6 +60,7 @@
     <Compile Include="DbModel\DbFinishingJob.cs" />
     <Compile Include="DbModel\DbOrder.cs" />
     <Compile Include="DbModel\DbPaperFormat.cs" />
+    <Compile Include="DbModel\DbPaperType.cs" />
     <Compile Include="DbModel\DbProofsheet.cs" />
     <Compile Include="DbModel\DbRights.cs" />
     <Compile Include="Model\FinishingJobFlags.cs" />
@@ -118,7 +119,15 @@
     <EmbeddedResource Include="DbModel\Mapping\DbOrder.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DbModel\DbProofsheet.hbm.xml" />
+    <EmbeddedResource Include="DbModel\Mapping\DbProofsheet.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DbModel\Mapping\DbPaperType.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DbModel\Mapping\TV.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
