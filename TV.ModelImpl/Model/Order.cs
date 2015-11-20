@@ -1,5 +1,7 @@
-﻿using System;
+﻿using NHibernate;
+using System;
 using System.Drawing;
+using TV.Core.Context;
 using TV.Model;
 using TV.ModelImpl.DbModel;
 
@@ -94,17 +96,57 @@ namespace TV.ModelImpl.Model
 
         public void Save()
         {
-            throw new NotImplementedException();
+            using (ISession session = UserContext.SessionFactory.OpenSession())
+            {
+                using (ITransaction tx = session.BeginTransaction())
+                {
+                    if (Id == Guid.Empty)
+                    {
+                        using (AppliactionContext.Log.LogTime(this, $"Save order"))
+                        {
+                            session.Save(_dbOrder);
+                        }
+                    }
+                    else
+                    {
+                        using (AppliactionContext.Log.LogTime(this, $"Update contact persone"))
+                        {
+                            session.Update(_dbOrder);
+                        }
+                    }
+                    tx.Commit();
+                }
+            }
         }
 
         public void Reload()
         {
-            throw new NotImplementedException();
+            using (ISession session = UserContext.SessionFactory.OpenSession())
+            {
+                using (ITransaction tx = session.BeginTransaction())
+                {
+                    using (AppliactionContext.Log.LogTime(this,$"Reload contact person"))
+                    {
+                        DbOrder reloadedObOrder = session.Load<DbOrder>(_dbOrder.Id);
+                    }
+                    tx.Commit();
+                }
+            }
         }
 
         public void Delete()
         {
-            throw new NotImplementedException();
+            using (ISession session = UserContext.SessionFactory.OpenSession())
+            {
+                using (ITransaction tx = session.BeginTransaction())
+                {
+                    using (AppliactionContext.Log.LogTime(this, $"Delete contact person."))
+                    {
+                        session.Delete(_dbOrder);
+                    }
+                    tx.Commit();
+                }
+            }
         }
 
         private DbOrder _dbOrder;

@@ -1,3 +1,11 @@
+BEGIN;
+CREATE DATABASE "TiskarnaVosahlo"
+  WITH ENCODING='UTF8'
+       OWNER=postgres
+       CONNECTION LIMIT=-1; 
+COMMIT;
+	   
+BEGIN;
 CREATE DATABASE "TiskarnaVosahlo"
   WITH ENCODING='UTF8'
        OWNER=postgres
@@ -5,6 +13,17 @@ CREATE DATABASE "TiskarnaVosahlo"
 	   
 COMMIT;
 	   
+BEGIN;
+
+DROP TABLE IF EXISTS public.users CASCADE;
+DROP TABLE IF EXISTS public.rights CASCADE;
+DROP TABLE IF EXISTS public.paperformats CASCADE;
+DROP TABLE IF EXISTS public.contactpersons CASCADE;
+DROP TABLE IF EXISTS public.finishingjob CASCADE;
+DROP TABLE IF EXISTS public.papertype CASCADE;
+DROP TABLE IF EXISTS public.proofsheet CASCADE;
+DROP TABLE IF EXISTS public.order CASCADE;
+
 CREATE TABLE public.users (
   id UUID NOT NULL,
   username VARCHAR(64) NOT NULL,
@@ -13,7 +32,6 @@ CREATE TABLE public.users (
   CONSTRAINT users_username_key UNIQUE(username)
 ) 
 WITH (oids = false);
-COMMIT;
 
 CREATE TABLE public.rights (
   id UUID NOT NULL,
@@ -28,7 +46,6 @@ CREATE TABLE public.rights (
     NOT DEFERRABLE
 ) 
 WITH (oids = false);
-COMMIT;
 
 CREATE TABLE public.paperformats (
   id UUID NOT NULL,
@@ -39,7 +56,6 @@ CREATE TABLE public.paperformats (
   CONSTRAINT paper_format_pkey PRIMARY KEY(id)
 ) 
 WITH (oids = false);
-COMMIT;
 
 CREATE TABLE public.contactpersons (
   id UUID NOT NULL,
@@ -50,7 +66,6 @@ CREATE TABLE public.contactpersons (
   CONSTRAINT contactperson_pkey PRIMARY KEY(id)
 ) 
 WITH (oids = false);
-COMMIT;
 
 CREATE TABLE public.finishingjob (
   id UUID NOT NULL,
@@ -59,19 +74,24 @@ CREATE TABLE public.finishingjob (
   CONSTRAINT finishingjob_pkey PRIMARY KEY(id)
 ) 
 WITH (oids = false);
-COMMIT;
 
-CREATE TABLE "order"
-(
-  id uuid NOT NULL,
-  ordertype character varying(256) NOT NULL,
-  ordertime date NOT NULL,
-  CONSTRAINT orders_pkey PRIMARY KEY (id)
-)
-WITH (OIDS=FALSE);
-COMMIT;
+CREATE TABLE public.papertype (
+  id UUID NOT NULL,
+  color INTEGER NOT NULL,
+  type VARCHAR(256),
+  CONSTRAINT papertype_pkey PRIMARY KEY(id)
+) 
+WITH (oids = false);
 
-CREATE TABLE public."order" (
+CREATE TABLE public.proofsheet (
+  id UUID NOT NULL,
+  time TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
+  passed BOOLEAN NOT NULL,
+  CONSTRAINT proofsheet_pkey PRIMARY KEY(id)
+) 
+WITH (oids = false);
+
+CREATE TABLE public.order (
   id UUID NOT NULL,
   contactperson UUID NOT NULL,
   ordertype VARCHAR(256) NOT NULL,
