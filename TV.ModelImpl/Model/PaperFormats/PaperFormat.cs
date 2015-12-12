@@ -7,15 +7,15 @@ using TV.ModelImpl.DbModel;
 
 namespace TV.ModelImpl.Model.PaperFormats
 {
-    public class PaperFormatStorable : IPaperFormat
+    public class PaperFormat : IPaperFormat
     {
-        public string Name
+        public virtual string Name
         {
             get { return _dbPaperFormat.Name; }
             set { _dbPaperFormat.Name = value; }
         }
 
-        public Size Size
+        public virtual Size Size
         {
             get { return new Size(_dbPaperFormat.Width, _dbPaperFormat.Height); }
             set
@@ -27,17 +27,22 @@ namespace TV.ModelImpl.Model.PaperFormats
 
         public bool IsBuildIn
         {
-            get { return false; }
+            get { return _dbPaperFormat.IsBuildin; }
         }
 
-        public PaperFormatStorable(DbPaperFormat dbPaperFormat)
+        public PaperFormat() :
+            this(new DbPaperFormat())
+        {
+        }
+
+        public PaperFormat(DbPaperFormat dbPaperFormat)
         {
             _dbPaperFormat = dbPaperFormat;
         }
 
-        public void Save()
+        public virtual void Save()
         {
-            using (AppliactionContext.Log.LogTime(this, String.Format("Save custom paper format '{0}'.", Name)))
+            using (AppliactionContext.Log.LogTime(this, String.Format("Save paper format '{0}'.", Name)))
             {
                 using (ISession session = AppliactionContext.SessionFactory.OpenSession())
                 {
@@ -57,9 +62,9 @@ namespace TV.ModelImpl.Model.PaperFormats
             }
         }
 
-        public void Reload()
+        public virtual void Reload()
         {
-            using (AppliactionContext.Log.LogTime(this, String.Format("Reload custom paper format '{0}'.", Name)))
+            using (AppliactionContext.Log.LogTime(this, String.Format("Reload paper format '{0}'.", Name)))
             {
                 using (ISession session = AppliactionContext.SessionFactory.OpenSession())
                 {
@@ -75,9 +80,9 @@ namespace TV.ModelImpl.Model.PaperFormats
             }
         }
 
-        public void Delete()
+        public virtual void Delete()
         {
-            using (AppliactionContext.Log.LogTime(this, String.Format("Delete custom paper format '{0}'.", Name)))
+            using (AppliactionContext.Log.LogTime(this, String.Format("Delete paper format '{0}'.", Name)))
             {
                 using (ISession session = AppliactionContext.SessionFactory.OpenSession())
                 {

@@ -70,7 +70,7 @@
     <Compile Include="Model\PaperFormats\PaperFormats.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Organisation.cs" />
-    <Compile Include="Model\PaperFormats\PaperFormatStorable.cs" />
+    <Compile Include="Model\PaperFormats\PaperFormat.cs" />
     <Compile Include="Model\PaperType.cs" />
     <Compile Include="Model\PrintImplementation.cs" />
     <Compile Include="Model\Proofsheet.cs" />

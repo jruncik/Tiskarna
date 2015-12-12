@@ -11,5 +11,6 @@
     <property name="Name" column="name" not-null="true" />
     <property name="Width" column="width" not-null="true" />
     <property name="Height" column="height" not-null="true" />
+    <property name="IsBuildin" column="isbuildin" not-null="true" />
    </class>
 </hibernate-mapping>

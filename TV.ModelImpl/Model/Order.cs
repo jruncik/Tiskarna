@@ -4,6 +4,7 @@ using System.Drawing;
 using TV.Core.Context;
 using TV.Model;
 using TV.ModelImpl.DbModel;
+using TV.ModelImpl.Model.PaperFormats;
 
 namespace TV.ModelImpl.Model
 {
@@ -24,7 +25,11 @@ namespace TV.ModelImpl.Model
             set { _dbOrder.Id = value; }
         }
 
-        public IContactPerson Contact { get; set; }
+        public IContactPerson Contact
+        {
+            get { return _contactPerson; }
+            set { _contactPerson = (ContactPerson)value; }
+        }
 
         public string OrderType
         {
@@ -44,9 +49,17 @@ namespace TV.ModelImpl.Model
             set { _dbOrder.FinishTime = value; }
         }
 
-        public Priority Priority { get; set; }
+        public Priority Priority
+        {
+            get { return (Priority)_dbOrder.Priority; }
+            set { _dbOrder.Priority = (int)value; }
+        }
 
-        public IPaperFormat Format { get; set; }
+        public IPaperFormat Format
+        {
+            get { return _paperFormat; }
+            set { _paperFormat = value; }
+        }
 
         public int PageCount
         {
@@ -66,11 +79,23 @@ namespace TV.ModelImpl.Model
             set { _dbOrder.QuireCount = value; }
         }
 
-        public Color PrintColor { get; set; }
+        public Color PrintColor
+        {
+            get { return Color.FromArgb(_dbOrder.PrintColor); }
+            set { _dbOrder.PrintColor = value.ToArgb(); }
+        }
 
-        public IPaperType PaperType { get; set; }
+        public IPaperType PaperType
+        {
+            get { return _paperType; }
+            set { _paperType = (PaperType)value; }
+        }
 
-        public IPrintImplementation Implementation { get; set; }
+        public IPrintImplementation Implementation
+        {
+            get { return _implementation; }
+            set { _implementation = (PrintImplementation)value; }
+        }
 
         public bool IsSpecimenSupplied
         {
@@ -84,14 +109,36 @@ namespace TV.ModelImpl.Model
             set { _dbOrder.IsPageCompositionSupplied = value; }
         }
 
-        public IProofsheet Proofsheets { get; set; }
+        public IProofsheet Proofsheets
+        {
+            get { return _proofsheets; }
+            set { _proofsheets = (Proofsheet)value; }
+        }
 
-        public IFinishingJob Finishing { get; set; }
+
+        public IFinishingJob Finishing
+        {
+            get { return _finishing; }
+            set { _finishing = (FinishingJob)value; }
+        }
 
         public string Details
         {
             get { return _dbOrder.Details; }
             set { _dbOrder.Details = value; }
+        }
+
+        IProofsheet IOrder.Proofsheets
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public void Save()
@@ -109,7 +156,7 @@ namespace TV.ModelImpl.Model
                     }
                     else
                     {
-                        using (AppliactionContext.Log.LogTime(this, $"Update contact persone"))
+                        using (AppliactionContext.Log.LogTime(this, $"Update order"))
                         {
                             session.Update(_dbOrder);
                         }
@@ -125,7 +172,7 @@ namespace TV.ModelImpl.Model
             {
                 using (ITransaction tx = session.BeginTransaction())
                 {
-                    using (AppliactionContext.Log.LogTime(this,$"Reload contact person"))
+                    using (AppliactionContext.Log.LogTime(this,$"Reload order."))
                     {
                         DbOrder reloadedObOrder = session.Load<DbOrder>(_dbOrder.Id);
                     }
@@ -140,7 +187,7 @@ namespace TV.ModelImpl.Model
             {
                 using (ITransaction tx = session.BeginTransaction())
                 {
-                    using (AppliactionContext.Log.LogTime(this, $"Delete contact person."))
+                    using (AppliactionContext.Log.LogTime(this, $"Delete order."))
                     {
                         session.Delete(_dbOrder);
                     }
@@ -150,5 +197,11 @@ namespace TV.ModelImpl.Model
         }
 
         private DbOrder _dbOrder;
+        private ContactPerson _contactPerson;
+        private IPaperFormat _paperFormat;
+        private PaperType _paperType;
+        private PrintImplementation _implementation;
+        private Proofsheet _proofsheets;
+        private FinishingJob _finishing;
     }
 }

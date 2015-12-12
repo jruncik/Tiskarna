@@ -5,52 +5,31 @@ using TV.Model;
 
 namespace TV.ModelImpl.Model.PaperFormats
 {
-    public class PaperFormatBuildin : IPaperFormat
+    public class PaperFormatBuildin : PaperFormat
     {
-        public string Name
+        public override string Name
         {
-            get { return _name; }
             set { throw new TvException("Buildin format can't be modifies"); }
         }
 
-        public Size Size
+        public override Size Size
         {
-            get { return _size; }
             set { throw new TvException("Buildin format can't be modifies"); }
         }
 
-        public bool IsBuildIn
-        {
-            get { return true; }
-        }
-
-        public PaperFormatBuildin(string name, int width, int height)
-        {
-            _name = name;
-            _size = new Size(width, height);
-        }
-
-        public override string ToString()
-        {
-            return String.Format("{0} - {1}x{2}", Name, Size.Width, Size.Height);
-        }
-
-        public void Save()
+        public override void Save()
         {
             throw new NotImplementedException();
         }
 
-        public void Reload()
+        public override void Reload()
         {
             throw new NotImplementedException();
         }
 
-        public void Delete()
+        public override void Delete()
         {
             throw new NotImplementedException();
         }
-
-        private readonly string _name;
-        private readonly Size _size;
     }
 }
