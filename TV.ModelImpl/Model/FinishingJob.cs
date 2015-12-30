@@ -108,15 +108,24 @@ namespace TV.ModelImpl.Model
                 {
                     using (ITransaction tx = session.BeginTransaction())
                     {
-                        if (Id == Guid.Empty)
+                        try
                         {
-                            session.Save(_dbFinishingJob);
+                            if (Id == Guid.Empty)
+                            {
+                                session.Save(_dbFinishingJob);
+                            }
+                            else
+                            {
+                                session.Update(_dbFinishingJob);
+                            }
+                            tx.Commit();
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            session.Update(_dbFinishingJob);
+                            AppliactionContext.Log.Critical(this, ex.Message);
+                            tx.Rollback();
+                            throw ex;
                         }
-                        tx.Commit();
                     }
                 }
             }
@@ -130,10 +139,19 @@ namespace TV.ModelImpl.Model
                 {
                     using (ITransaction tx = session.BeginTransaction())
                     {
-                        DbFinishingJob reloadedFinishingJob = session.Load<DbFinishingJob>(_dbFinishingJob.Id);
+                        try
+                        {
+                            DbFinishingJob reloadedFinishingJob = session.Load<DbFinishingJob>(_dbFinishingJob.Id);
 
-                        _dbFinishingJob.Flags = reloadedFinishingJob.Flags;
-                        _dbFinishingJob.Other = reloadedFinishingJob.Other;
+                            _dbFinishingJob.Flags = reloadedFinishingJob.Flags;
+                            _dbFinishingJob.Other = reloadedFinishingJob.Other;
+                        }
+                        catch (Exception ex)
+                        {
+                            AppliactionContext.Log.Critical(this, ex.Message);
+                            tx.Rollback();
+                            throw ex;
+                        }
                     }
                 }
             }
@@ -147,8 +165,17 @@ namespace TV.ModelImpl.Model
                 {
                     using (ITransaction tx = session.BeginTransaction())
                     {
-                        session.Delete(_dbFinishingJob);
-                        tx.Commit();
+                        try
+                        {
+                            session.Delete(_dbFinishingJob);
+                            tx.Commit();
+                        }
+                        catch (Exception ex)
+                        {
+                            AppliactionContext.Log.Critical(this, ex.Message);
+                            tx.Rollback();
+                            throw ex;
+                        }
                     }
                 }
             }

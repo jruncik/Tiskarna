@@ -42,21 +42,30 @@ namespace TV.ModelImpl.Model
             {
                 using (ITransaction tx = session.BeginTransaction())
                 {
-                    if (Id == Guid.Empty)
+                    try
                     {
-                        using (AppliactionContext.Log.LogTime(this, $"Save proofsheet."))
+                        if (Id == Guid.Empty)
                         {
-                            session.Save(_dbProofSheet);
+                            using (AppliactionContext.Log.LogTime(this, $"Save proofsheet."))
+                            {
+                                session.Save(_dbProofSheet);
+                            }
                         }
+                        else
+                        {
+                            using (AppliactionContext.Log.LogTime(this, $"Update proofsheet {Id}"))
+                            {
+                                session.Update(_dbProofSheet);
+                            }
+                        }
+                        tx.Commit();
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        using (AppliactionContext.Log.LogTime(this, $"Update proofsheet {Id}"))
-                        {
-                            session.Update(_dbProofSheet);
-                        }
+                        AppliactionContext.Log.Critical(this, ex.Message);
+                        tx.Rollback();
+                        throw ex;
                     }
-                    tx.Commit();
                 }
             }
         }
@@ -67,14 +76,23 @@ namespace TV.ModelImpl.Model
             {
                 using (ITransaction tx = session.BeginTransaction())
                 {
-                    using (AppliactionContext.Log.LogTime(this, $"Reload proofsheet {Id}"))
+                    try
                     {
-                        DbProofsheet reloadeDbProofsheet = session.Load<DbProofsheet>(_dbProofSheet.Id);
+                        using (AppliactionContext.Log.LogTime(this, $"Reload proofsheet {Id}"))
+                        {
+                            DbProofsheet reloadeDbProofsheet = session.Load<DbProofsheet>(_dbProofSheet.Id);
 
-                        _dbProofSheet.Time = reloadeDbProofsheet.Time;
-                        _dbProofSheet.Passed = reloadeDbProofsheet.Passed;
+                            _dbProofSheet.Time = reloadeDbProofsheet.Time;
+                            _dbProofSheet.Passed = reloadeDbProofsheet.Passed;
+                        }
+                        tx.Commit();
                     }
-                    tx.Commit();
+                    catch (Exception ex)
+                    {
+                        AppliactionContext.Log.Critical(this, ex.Message);
+                        tx.Rollback();
+                        throw ex;
+                    }
                 }
             }
         }
@@ -85,11 +103,20 @@ namespace TV.ModelImpl.Model
             {
                 using (ITransaction tx = session.BeginTransaction())
                 {
-                    using (AppliactionContext.Log.LogTime(this, $"Delete proofsheet {Id}"))
+                    try
                     {
-                        session.Delete(_dbProofSheet);
+                        using (AppliactionContext.Log.LogTime(this, $"Delete proofsheet {Id}"))
+                        {
+                            session.Delete(_dbProofSheet);
+                        }
+                        tx.Commit();
                     }
-                    tx.Commit();
+                    catch (Exception ex)
+                    {
+                        AppliactionContext.Log.Critical(this, ex.Message);
+                        tx.Rollback();
+                        throw ex;
+                    }
                 }
             }
         }

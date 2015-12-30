@@ -71,15 +71,24 @@ namespace TV.CoreImpl.Users
                 {
                     using (ITransaction tx = session.BeginTransaction())
                     {
-                        if (Id == Guid.Empty)
+                        try
                         {
-                            session.Save(_dbUser);
+                            if (Id == Guid.Empty)
+                            {
+                                session.Save(_dbUser);
+                            }
+                            else
+                            {
+                                session.Update(_dbUser);
+                            }
+                            tx.Commit();
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            session.Update(_dbUser);
+                            AppliactionContext.Log.Critical(this, ex.Message);
+                            tx.Rollback();
+                            throw ex;
                         }
-                        tx.Commit();
                     }
                 }
             }
@@ -93,10 +102,19 @@ namespace TV.CoreImpl.Users
                 {
                     using (ITransaction tx = session.BeginTransaction())
                     {
-                        DbUser reloadedUser = session.Load<DbUser>(_dbUser.Id);
+                        try
+                        {
+                            DbUser reloadedUser = session.Load<DbUser>(_dbUser.Id);
 
-                        _dbUser.Password = reloadedUser.Password;
-                        _dbUser.Username = reloadedUser.Username;
+                            _dbUser.Password = reloadedUser.Password;
+                            _dbUser.Username = reloadedUser.Username;
+                        }
+                        catch (Exception ex)
+                        {
+                            AppliactionContext.Log.Critical(this, ex.Message);
+                            tx.Rollback();
+                            throw ex;
+                        }
                     }
                 }
             }
@@ -110,8 +128,17 @@ namespace TV.CoreImpl.Users
                 {
                     using (ITransaction tx = session.BeginTransaction())
                     {
-                        session.Delete(_dbUser);
-                        tx.Commit();
+                        try
+                        {
+                            session.Delete(_dbUser);
+                            tx.Commit();
+                        }
+                        catch (Exception ex)
+                        {
+                            AppliactionContext.Log.Critical(this, ex.Message);
+                            tx.Rollback();
+                            throw ex;
+                        }
                     }
                 }
             }

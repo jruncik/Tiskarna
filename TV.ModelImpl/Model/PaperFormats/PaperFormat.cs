@@ -48,15 +48,24 @@ namespace TV.ModelImpl.Model.PaperFormats
                 {
                     using (ITransaction tx = session.BeginTransaction())
                     {
-                        if (_dbPaperFormat.Id == Guid.Empty)
+                        try
                         {
-                            session.Save(_dbPaperFormat);
+                            if (_dbPaperFormat.Id == Guid.Empty)
+                            {
+                                session.Save(_dbPaperFormat);
+                            }
+                            else
+                            {
+                                session.Update(_dbPaperFormat);
+                            }
+                            tx.Commit();
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            session.Update(_dbPaperFormat);
+                            AppliactionContext.Log.Critical(this, ex.Message);
+                            tx.Rollback();
+                            throw ex;
                         }
-                        tx.Commit();
                     }
                 }
             }
@@ -70,11 +79,21 @@ namespace TV.ModelImpl.Model.PaperFormats
                 {
                     using (ITransaction tx = session.BeginTransaction())
                     {
-                        DbPaperFormat reloadedcustPaperFmt = (DbPaperFormat)session.Load<DbPaperFormat>(_dbPaperFormat.Id);
+                        try
+                        {
+                            DbPaperFormat reloadedcustPaperFmt = (DbPaperFormat)session.Load<DbPaperFormat>(_dbPaperFormat.Id);
 
-                        _dbPaperFormat.Name = reloadedcustPaperFmt.Name;
-                        _dbPaperFormat.Width = reloadedcustPaperFmt.Width;
-                        _dbPaperFormat.Height = reloadedcustPaperFmt.Height;
+                            _dbPaperFormat.Name = reloadedcustPaperFmt.Name;
+                            _dbPaperFormat.Width = reloadedcustPaperFmt.Width;
+                            _dbPaperFormat.Height = reloadedcustPaperFmt.Height;
+                        }
+                        catch (Exception ex)
+                        {
+                            AppliactionContext.Log.Critical(this, ex.Message);
+                            tx.Rollback();
+                            throw ex;
+                        }
+
                     }
                 }
             }
@@ -88,8 +107,17 @@ namespace TV.ModelImpl.Model.PaperFormats
                 {
                     using (ITransaction tx = session.BeginTransaction())
                     {
-                        session.Delete(_dbPaperFormat);
-                        tx.Commit();
+                        try
+                        {
+                            session.Delete(_dbPaperFormat);
+                            tx.Commit();
+                        }
+                        catch (Exception ex)
+                        {
+                            AppliactionContext.Log.Critical(this, ex.Message);
+                            tx.Rollback();
+                            throw ex;
+                        }
                     }
                 }
             }

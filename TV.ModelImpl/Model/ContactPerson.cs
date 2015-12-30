@@ -55,21 +55,30 @@ namespace TV.ModelImpl.Model
             {
                 using (ITransaction tx = session.BeginTransaction())
                 {
-                    if (Id == Guid.Empty)
+                    try
                     {
-                        using (AppliactionContext.Log.LogTime(this, String.Format("Save contact persone '{0} {1}'.", FirstName, LastName)))
+                        if (Id == Guid.Empty)
                         {
-                            session.Save(_dbContactPerson);
+                            using (AppliactionContext.Log.LogTime(this, String.Format("Save contact persone '{0} {1}'.", FirstName, LastName)))
+                            {
+                                session.Save(_dbContactPerson);
+                            }
                         }
+                        else
+                        {
+                            using (AppliactionContext.Log.LogTime(this, String.Format("Update contact persone '{0} {1}'.", FirstName, LastName)))
+                            {
+                                session.Update(_dbContactPerson);
+                            }
+                        }
+                        tx.Commit();
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        using (AppliactionContext.Log.LogTime(this, String.Format("Update contact persone '{0} {1}'.", FirstName, LastName)))
-                        {
-                            session.Update(_dbContactPerson);
-                        }
+                        AppliactionContext.Log.Critical(this, ex.Message);
+                        tx.Rollback();
+                        throw ex;
                     }
-                    tx.Commit();
                 }
             }
         }
@@ -80,16 +89,25 @@ namespace TV.ModelImpl.Model
             {
                 using (ITransaction tx = session.BeginTransaction())
                 {
-                    using (AppliactionContext.Log.LogTime(this, String.Format("Reload contact person '{0} {1}'.", FirstName, LastName)))
+                    try
                     {
-                        DbContactPerson reloadedContactPerson = session.Load<DbContactPerson>(_dbContactPerson.Id);
+                        using (AppliactionContext.Log.LogTime(this, String.Format("Reload contact person '{0} {1}'.", FirstName, LastName)))
+                        {
+                            DbContactPerson reloadedContactPerson = session.Load<DbContactPerson>(_dbContactPerson.Id);
 
-                        _dbContactPerson.FirstName = reloadedContactPerson.FirstName;
-                        _dbContactPerson.LastName = reloadedContactPerson.LastName;
-                        _dbContactPerson.PhoneNumber = reloadedContactPerson.PhoneNumber;
-                        _dbContactPerson.Email = reloadedContactPerson.Email;
+                            _dbContactPerson.FirstName = reloadedContactPerson.FirstName;
+                            _dbContactPerson.LastName = reloadedContactPerson.LastName;
+                            _dbContactPerson.PhoneNumber = reloadedContactPerson.PhoneNumber;
+                            _dbContactPerson.Email = reloadedContactPerson.Email;
+                        }
+                        tx.Commit();
                     }
-                    tx.Commit();
+                    catch (Exception ex)
+                    {
+                        AppliactionContext.Log.Critical(this, ex.Message);
+                        tx.Rollback();
+                        throw ex;
+                    }
                 }
             }
         }
@@ -100,11 +118,20 @@ namespace TV.ModelImpl.Model
             {
                 using (ITransaction tx = session.BeginTransaction())
                 {
-                    using (AppliactionContext.Log.LogTime(this, String.Format("Delete contact person '{0} {1}'.", FirstName, LastName)))
+                    try
                     {
-                        session.Delete(_dbContactPerson);
+                        using (AppliactionContext.Log.LogTime(this, String.Format("Delete contact person '{0} {1}'.", FirstName, LastName)))
+                        {
+                            session.Delete(_dbContactPerson);
+                        }
+                        tx.Commit();
                     }
-                    tx.Commit();
+                    catch (Exception ex)
+                    {
+                        AppliactionContext.Log.Critical(this, ex.Message);
+                        tx.Rollback();
+                        throw ex;
+                    }
                 }
             }
         }

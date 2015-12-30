@@ -10,7 +10,7 @@ namespace TV.ModelImpl.Model
 {
     public class Order : IOrder
     {
-        public Order():
+        public Order() :
             this(new DbOrder())
         { }
 
@@ -147,21 +147,30 @@ namespace TV.ModelImpl.Model
             {
                 using (ITransaction tx = session.BeginTransaction())
                 {
-                    if (Id == Guid.Empty)
+                    try
                     {
-                        using (AppliactionContext.Log.LogTime(this, $"Save order"))
+                        if (Id == Guid.Empty)
                         {
-                            session.Save(_dbOrder);
+                            using (AppliactionContext.Log.LogTime(this, $"Save order"))
+                            {
+                                session.Save(_dbOrder);
+                            }
                         }
+                        else
+                        {
+                            using (AppliactionContext.Log.LogTime(this, $"Update order"))
+                            {
+                                session.Update(_dbOrder);
+                            }
+                        }
+                        tx.Commit();
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        using (AppliactionContext.Log.LogTime(this, $"Update order"))
-                        {
-                            session.Update(_dbOrder);
-                        }
+                        AppliactionContext.Log.Critical(this, ex.Message);
+                        tx.Rollback();
+                        throw ex;
                     }
-                    tx.Commit();
                 }
             }
         }
@@ -172,11 +181,21 @@ namespace TV.ModelImpl.Model
             {
                 using (ITransaction tx = session.BeginTransaction())
                 {
-                    using (AppliactionContext.Log.LogTime(this,$"Reload order."))
+                    try
                     {
-                        DbOrder reloadedObOrder = session.Load<DbOrder>(_dbOrder.Id);
+                        using (AppliactionContext.Log.LogTime(this, $"Reload order."))
+                        {
+                            DbOrder reloadedObOrder = session.Load<DbOrder>(_dbOrder.Id);
+                        }
+                        tx.Commit();
                     }
-                    tx.Commit();
+                    catch (Exception ex)
+                    {
+                        AppliactionContext.Log.Critical(this, ex.Message);
+                        tx.Rollback();
+                        throw ex;
+                    }
+
                 }
             }
         }
@@ -187,11 +206,20 @@ namespace TV.ModelImpl.Model
             {
                 using (ITransaction tx = session.BeginTransaction())
                 {
-                    using (AppliactionContext.Log.LogTime(this, $"Delete order."))
+                    try
                     {
-                        session.Delete(_dbOrder);
+                        using (AppliactionContext.Log.LogTime(this, $"Delete order."))
+                        {
+                            session.Delete(_dbOrder);
+                        }
+                        tx.Commit();
                     }
-                    tx.Commit();
+                    catch (Exception ex)
+                    {
+                        AppliactionContext.Log.Critical(this, ex.Message);
+                        tx.Rollback();
+                        throw ex;
+                    }
                 }
             }
         }
