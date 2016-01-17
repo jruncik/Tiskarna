@@ -13,21 +13,20 @@ namespace TV.CoreImpl.Tests
     public class TiskarnaVosahloPaperFormatsTests
     {
         [Test]
-        [ExpectedException(typeof(TvException))]
         public void AddBuildinFormat()
         {
             IPaperFormats paperFormats = TiskarnaVosahlo.PaperFormats;
-            paperFormats.AddFormat(BUILIN_FORMAT_NAME_A4, EXPECTED_WIDTH, EXPECTED_HEIGHT);
+
+            Assert.That(() => paperFormats.AddFormat(BUILIN_FORMAT_NAME_A4, EXPECTED_WIDTH, EXPECTED_HEIGHT), Throws.TypeOf<TvException>());
         }
 
         [Test]
-        [ExpectedException(typeof(RightsException))]
         public void AddNewFormatWithoutRights()
         {
             TiskarnaVosahlo.Autentication.LogIn(GUEST_USERNAME, GUEST_PASSWORD);
             IPaperFormats paperFormats = TiskarnaVosahlo.PaperFormats;
 
-            paperFormats.AddFormat(NEW_FORMAT, EXPECTED_WIDTH, EXPECTED_HEIGHT);
+            Assert.That(() => paperFormats.AddFormat(NEW_FORMAT, EXPECTED_WIDTH, EXPECTED_HEIGHT), Throws.TypeOf<RightsException>());
         }
 
         [Test]
@@ -58,7 +57,7 @@ namespace TV.CoreImpl.Tests
             UserContext.Logout();
         }
 
-        [TestFixtureSetUp]
+        [OneTimeSetUpAttribute]
         public void AllTestsInit()
         {
             new TiskarnaVosahlo();

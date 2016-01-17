@@ -44,12 +44,12 @@ namespace TV.CoreImpl.Tests
         {
         }
 
-        [TestFixtureSetUp]
+        [OneTimeSetUpAttribute]
         public void AllTestsInit()
         {
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDownAttribute]
         public void AllTestCleanup()
         {
         }

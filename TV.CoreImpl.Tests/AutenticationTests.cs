@@ -12,31 +12,27 @@ namespace TV.CoreImpl.Tests
     public class AutenticationTests
     {
         [Test]
-        [ExpectedException(typeof (AutenticationException))]
         public void LoginUserWithEmptyUsername()
         {
-            TiskarnaVosahlo.Autentication.LogIn("", PASSWORD);
+            Assert.That(() => TiskarnaVosahlo.Autentication.LogIn("", PASSWORD), Throws.TypeOf<AutenticationException>());
         }
 
         [Test]
-        [ExpectedException(typeof (AutenticationException))]
         public void LoginUserWithEmptyPassword()
         {
-            TiskarnaVosahlo.Autentication.LogIn(USERNAME, "");
+            Assert.That(() => TiskarnaVosahlo.Autentication.LogIn(USERNAME, ""), Throws.TypeOf<AutenticationException>());
         }
 
         [Test]
-        [ExpectedException(typeof (AutenticationException))]
         public void LoginUserWrongUser()
         {
-            TiskarnaVosahlo.Autentication.LogIn(WRONG_USERNAME, PASSWORD);
+            Assert.That(() => TiskarnaVosahlo.Autentication.LogIn(WRONG_USERNAME, PASSWORD), Throws.TypeOf<AutenticationException>());
         }
 
         [Test]
-        [ExpectedException(typeof (AutenticationException))]
         public void LoginUserWrongPassword()
         {
-            TiskarnaVosahlo.Autentication.LogIn(USERNAME, WRONG_PASSWORD);
+            Assert.That(() => TiskarnaVosahlo.Autentication.LogIn(USERNAME, WRONG_PASSWORD), Throws.TypeOf<AutenticationException>());
         }
 
         [Test]
@@ -93,13 +89,13 @@ namespace TV.CoreImpl.Tests
             TiskarnaVosahlo.UserManagement.DeleteAllUsers();
         }
 
-        [TestFixtureSetUp]
+        [OneTimeSetUpAttribute]
         public void AllTestsInit()
         {
             new TiskarnaVosahlo();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDownAttribute]
         public void AllTestCleanup()
         {
             TiskarnaVosahlo.UserManagement.DeleteAllUsers();

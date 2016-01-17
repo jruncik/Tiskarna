@@ -35,13 +35,13 @@ namespace TV.ModelImpl.Tests
             UserContext.Logout();
         }
 
-        [TestFixtureSetUp]
+        [OneTimeSetUpAttribute]
         public void AllTestsInit()
         {
             new TiskarnaVosahlo();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDownAttribute]
         public void AllTestCleanup()
         {
         }

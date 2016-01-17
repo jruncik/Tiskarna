@@ -141,7 +141,7 @@ namespace TV.CoreImpl.Tests
 
 
         #region Tests Initialization
-        [TestFixtureSetUp]
+        [OneTimeSetUpAttribute]
         public void AllTestsInit()
         {
             new TiskarnaVosahlo();

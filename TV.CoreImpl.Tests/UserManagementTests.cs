@@ -12,27 +12,24 @@ namespace TV.CoreImpl.Tests
     public class UserManagementTests
     {
         [Test]
-        [ExpectedException(typeof (UserManagementException))]
         public void CreateNewUserEmptyName()
         {
             TiskarnaVosahlo.Autentication.LogIn(MASTER_USERNAME, MASTER_PASSWORD);
 
             IUserManagement userManagement = TiskarnaVosahlo.UserManagement;
-            userManagement.CreateNewUser("", PASSWORD);
+            Assert.That(() => userManagement.CreateNewUser("", PASSWORD), Throws.TypeOf<UserManagementException>());
         }
 
         [Test]
-        [ExpectedException(typeof (UserManagementException))]
         public void CreateNewUserEmptyPassword()
         {
             TiskarnaVosahlo.Autentication.LogIn(MASTER_USERNAME, MASTER_PASSWORD);
 
             IUserManagement userManagement = TiskarnaVosahlo.UserManagement;
-            userManagement.CreateNewUser(USERNAME, "");
+            Assert.That(() => userManagement.CreateNewUser(USERNAME, ""), Throws.TypeOf<UserManagementException>());
         }
 
         [Test]
-        [ExpectedException(typeof (UserManagementException))]
         public void CreateNewUserAlreadyExist()
         {
             TiskarnaVosahlo.Autentication.LogIn(MASTER_USERNAME, MASTER_PASSWORD);
@@ -42,7 +39,7 @@ namespace TV.CoreImpl.Tests
 
             try
             {
-                userManagement.CreateNewUser(USERNAME, PASSWORD);
+                Assert.That(() => userManagement.CreateNewUser(USERNAME, PASSWORD), Throws.TypeOf<UserManagementException>());
             }
             finally
             {
@@ -51,13 +48,12 @@ namespace TV.CoreImpl.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(RightsException))]
         public void CreateNewUserWithoutRights()
         {
             TiskarnaVosahlo.Autentication.LogIn(GUEST_USERNAME, GUEST_PASSWORD);
             IUserManagement userManagement = TiskarnaVosahlo.UserManagement;
 
-            userManagement.CreateNewUser(USERNAME, PASSWORD);
+            Assert.That(() => userManagement.CreateNewUser(USERNAME, PASSWORD), Throws.TypeOf<RightsException>());
         }
 
         [Test]
@@ -153,13 +149,13 @@ namespace TV.CoreImpl.Tests
             TiskarnaVosahlo.UserManagement.DeleteAllUsers();
         }
 
-        [TestFixtureSetUp]
+        [OneTimeSetUpAttribute]
         public void AllTestsInit()
         {
             new TiskarnaVosahlo();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDownAttribute]
         public void AllTestCleanup()
         {
             TiskarnaVosahlo.UserManagement.DeleteAllUsers();
