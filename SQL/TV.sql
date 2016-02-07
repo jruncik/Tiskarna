@@ -16,6 +16,23 @@ DROP TABLE IF EXISTS public.finishingjob CASCADE;
 DROP TABLE IF EXISTS public.papertype CASCADE;
 DROP TABLE IF EXISTS public.proofsheet CASCADE;
 DROP TABLE IF EXISTS public.order CASCADE;
+DROP TABLE IF EXISTS public.bbb CASCADE;
+DROP TABLE IF EXISTS public.aaa CASCADE;
+
+CREATE TABLE public.aaa (
+  id uuid NOT NULL,
+  name character varying,
+  fk_bbb uuid NOT NULL,
+  CONSTRAINT id_aaa_pkey PRIMARY KEY (id)
+)
+WITH (OIDS=FALSE);
+
+CREATE TABLE public.bbb (
+  id uuid NOT NULL,
+  age integer,
+  CONSTRAINT id_bbb_pkey PRIMARY KEY (id)
+)
+WITH (OIDS=FALSE);
 
 CREATE TABLE public.users (
   id UUID NOT NULL,
