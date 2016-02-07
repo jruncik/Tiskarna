@@ -57,21 +57,11 @@ namespace TV.ModelImpl.Model
                 {
                     try
                     {
-                        if (Id == Guid.Empty)
+                        using (AppliactionContext.Log.LogTime(this, String.Format("Save contact persone '{0} {1}'.", FirstName, LastName)))
                         {
-                            using (AppliactionContext.Log.LogTime(this, String.Format("Save contact persone '{0} {1}'.", FirstName, LastName)))
-                            {
-                                session.Save(_dbContactPerson);
-                            }
+                            session.SaveOrUpdate(_dbContactPerson);
+                            tx.Commit();
                         }
-                        else
-                        {
-                            using (AppliactionContext.Log.LogTime(this, String.Format("Update contact persone '{0} {1}'.", FirstName, LastName)))
-                            {
-                                session.Update(_dbContactPerson);
-                            }
-                        }
-                        tx.Commit();
                     }
                     catch (Exception ex)
                     {
@@ -99,8 +89,9 @@ namespace TV.ModelImpl.Model
                             _dbContactPerson.LastName = reloadedContactPerson.LastName;
                             _dbContactPerson.PhoneNumber = reloadedContactPerson.PhoneNumber;
                             _dbContactPerson.Email = reloadedContactPerson.Email;
+
+                            tx.Commit();
                         }
-                        tx.Commit();
                     }
                     catch (Exception ex)
                     {
@@ -123,8 +114,8 @@ namespace TV.ModelImpl.Model
                         using (AppliactionContext.Log.LogTime(this, String.Format("Delete contact person '{0} {1}'.", FirstName, LastName)))
                         {
                             session.Delete(_dbContactPerson);
+                            tx.Commit();
                         }
-                        tx.Commit();
                     }
                     catch (Exception ex)
                     {
@@ -134,6 +125,11 @@ namespace TV.ModelImpl.Model
                     }
                 }
             }
+        }
+
+        internal DbContactPerson DbContactPerson
+        {
+            get { return _dbContactPerson; }
         }
 
         private readonly DbContactPerson _dbContactPerson;

@@ -57,6 +57,7 @@ namespace TV.ModelImpl.Model.PaperFormats
             _paperFormats.Remove(deletedPaperFormat);
             deletedPaperFormat.Delete();
         }
+
         private void ReadFormats()
         {
             using (AppliactionContext.Log.LogTime(this, "Reading all custom aper formats"))

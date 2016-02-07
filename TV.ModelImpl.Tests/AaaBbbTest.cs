@@ -6,24 +6,34 @@ using TV.Tiskarna;
 namespace TV.ModelImpl.Tests
 {
     [TestFixture]
-    public class ContactPersoneTests
+    public class AaaBbbTest
     {
         [Test]
         public void CreateContactPersone()
         {
-            ContactPerson cp = new ContactPerson();
-            cp.FirstName = "Jarosav";
-            cp.LastName = "Runcik";
-            cp.Email = "J.Runcik@seznam.cz";
-            cp.PhoneNumber = "+420 602 658 348";
+            Bbb bbb = new Bbb();
+            bbb.Age = 27;
+            bbb.Save();
 
-            cp.Save();
-            cp.Delete();
+            try
+            {
+                Aaa aaa = new Aaa();
+
+                aaa.Name = "aaa";
+                aaa.B = bbb;
+
+                aaa.Save();
+                aaa.Delete();
+            }
+            finally
+            {
+                bbb.Delete();
+            }
         }
 
-        #region Tests Initialization
+    #region Tests Initialization
 
-        [SetUp]
+    [SetUp]
         public void TestInit()
         {
             TiskarnaVosahlo.Autentication.LogIn(MASTER_USERNAME, MASTER_PASSWORD);

@@ -6,10 +6,10 @@ using TV.Tiskarna;
 namespace TV.ModelImpl.Tests
 {
     [TestFixture]
-    public class ContactPersoneTests
+    public class OrderTest
     {
         [Test]
-        public void CreateContactPersone()
+        public void CreateOrder()
         {
             ContactPerson cp = new ContactPerson();
             cp.FirstName = "Jarosav";
@@ -18,7 +18,20 @@ namespace TV.ModelImpl.Tests
             cp.PhoneNumber = "+420 602 658 348";
 
             cp.Save();
-            cp.Delete();
+
+            try
+            {
+                Order order = new Order();
+
+                order.Contact = cp;
+
+                order.Save();
+                order.Delete();
+            }
+            finally
+            {
+                cp.Delete();
+            }
         }
 
         #region Tests Initialization

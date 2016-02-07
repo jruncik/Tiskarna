@@ -4,7 +4,6 @@ using System.Drawing;
 using TV.Core.Context;
 using TV.Model;
 using TV.ModelImpl.DbModel;
-using TV.ModelImpl.Model.PaperFormats;
 
 namespace TV.ModelImpl.Model
 {
@@ -28,7 +27,11 @@ namespace TV.ModelImpl.Model
         public IContactPerson Contact
         {
             get { return _contactPerson; }
-            set { _contactPerson = (ContactPerson)value; }
+            set
+            {
+                _contactPerson = (ContactPerson)value;
+                _dbOrder.Contact = _contactPerson.DbContactPerson;
+            }
         }
 
         public string OrderType
@@ -115,7 +118,6 @@ namespace TV.ModelImpl.Model
             set { _proofsheets = (Proofsheet)value; }
         }
 
-
         public IFinishingJob Finishing
         {
             get { return _finishing; }
@@ -149,19 +151,9 @@ namespace TV.ModelImpl.Model
                 {
                     try
                     {
-                        if (Id == Guid.Empty)
+                        using (AppliactionContext.Log.LogTime(this, $"Save order"))
                         {
-                            using (AppliactionContext.Log.LogTime(this, $"Save order"))
-                            {
-                                session.Save(_dbOrder);
-                            }
-                        }
-                        else
-                        {
-                            using (AppliactionContext.Log.LogTime(this, $"Update order"))
-                            {
-                                session.Update(_dbOrder);
-                            }
+                            session.SaveOrUpdate(_dbOrder);
                         }
                         tx.Commit();
                     }

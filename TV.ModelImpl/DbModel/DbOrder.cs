@@ -6,7 +6,7 @@ namespace TV.ModelImpl.DbModel
     public class DbOrder
     {
         public virtual Guid Id { get; set; } = Guid.Empty;
-        public virtual Guid Contact { get; set; } = Guid.Empty;
+        public virtual DbContactPerson Contact { get; set; }
         public virtual string OrderType { get; set; } = String.Empty;
         public virtual DateTime OrderTime { get; set; } = DateTime.MinValue;
         public virtual DateTime FinishTime { get; set; } = DateTime.MinValue;
