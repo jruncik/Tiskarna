@@ -104,7 +104,7 @@ WITH (oids = false);
 
 CREATE TABLE public.order (
   id UUID NOT NULL,
-  contactperson UUID NOT NULL,
+  fk_contactperson UUID NOT NULL,
   ordertype VARCHAR(256) NOT NULL,
   ordertime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
   finishtime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
