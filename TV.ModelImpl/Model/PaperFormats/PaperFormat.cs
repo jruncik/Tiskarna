@@ -30,6 +30,11 @@ namespace TV.ModelImpl.Model.PaperFormats
             get { return _dbPaperFormat.IsBuildin; }
         }
 
+        internal DbPaperFormat DbPaperFormat
+        {
+            get { return _dbPaperFormat; }
+        }
+
         public PaperFormat() :
             this(new DbPaperFormat())
         {

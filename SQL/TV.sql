@@ -16,8 +16,11 @@ DROP TABLE IF EXISTS public.finishingjob CASCADE;
 DROP TABLE IF EXISTS public.papertype CASCADE;
 DROP TABLE IF EXISTS public.proofsheet CASCADE;
 DROP TABLE IF EXISTS public.order CASCADE;
+DROP TABLE IF EXISTS public.implementation CASCADE;
+
 DROP TABLE IF EXISTS public.bbb CASCADE;
 DROP TABLE IF EXISTS public.aaa CASCADE;
+
 
 CREATE TABLE public.aaa (
   id uuid NOT NULL,
@@ -102,30 +105,38 @@ CREATE TABLE public.proofsheet (
 ) 
 WITH (oids = false);
 
-CREATE TABLE public.order (
-  id UUID NOT NULL,
-  fk_contactperson UUID NOT NULL,
-  ordertype VARCHAR(256) NOT NULL,
-  ordertime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
-  finishtime TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
-  priority INTEGER NOT NULL,
-  format UUID NOT NULL,
-  pagecount INTEGER,
-  count INTEGER NOT NULL,
-  quirecount INTEGER,
-  printcolor INTEGER,
-  papertype UUID,
-  implementation UUID,
-  isspecimensupplied BOOLEAN,
-  ispagecompositionsupplied BOOLEAN,
-  proofsheet UUID,
-  finishingjob UUID,
-  details VARCHAR(512),
-  CONSTRAINT order_pkey PRIMARY KEY(id)
-) 
+CREATE TABLE "order"
+(
+  id uuid NOT NULL,
+  fk_contactperson uuid NOT NULL,
+  ordertype character varying(256) NOT NULL,
+  ordertime timestamp(0) without time zone NOT NULL,
+  finishtime timestamp(0) without time zone NOT NULL,
+  priority integer NOT NULL,
+  fk_format uuid NOT NULL,
+  pagecount integer,
+  count integer NOT NULL,
+  quirecount integer,
+  printcolor integer,
+  fk_papertype uuid,
+  fk_implementation uuid,
+  isspecimensupplied boolean,
+  ispagecompositionsupplied boolean,
+  fk_proofsheet uuid,
+  fk_finishingjob uuid,
+  details character varying(512),
+  CONSTRAINT order_pkey PRIMARY KEY (id)
+)
 WITH (oids = false);
 COMMIT;
 
+CREATE TABLE implementation (
+  id uuid NOT NULL,
+  CONSTRAINT implementation_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
 
 BEGIN;
 INSERT INTO paperformats VALUES(uuid_generate_v4(), 'A0', 841, 1189, TRUE);

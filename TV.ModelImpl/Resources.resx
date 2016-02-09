@@ -126,7 +126,7 @@
   <data name="PaperFormatAlreadyExist" xml:space="preserve">
     <value>Paperformat with name '{0}' already exist.</value>
   </data>
-  <data name="PaperFormatNotFounf" xml:space="preserve">
+  <data name="PaperFormatNotFound" xml:space="preserve">
     <value>Paperformat '{0}' wasn't found.</value>
   </data>
 </root>

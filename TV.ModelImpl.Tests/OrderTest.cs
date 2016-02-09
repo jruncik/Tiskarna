@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System;
 using TV.Core.Context;
 using TV.ModelImpl.Model;
 using TV.Tiskarna;
@@ -19,17 +20,36 @@ namespace TV.ModelImpl.Tests
 
             cp.Save();
 
+            PaperType paperType = new PaperType();
+            paperType.Color = System.Drawing.Color.Blue;
+            paperType.Type = "Stitek";
+
+            paperType.Save();
+
+            Proofsheet proofsheet = new Proofsheet();
+            proofsheet.Time = DateTime.Now;
+            proofsheet.Passed = true;
+
+            proofsheet.Save();
+
+
+
             try
             {
                 Order order = new Order();
 
                 order.Contact = cp;
+                order.Format = TiskarnaVosahlo.PaperFormats.GetFormat("A4");
+                order.PaperType = paperType;
+                order.Proofsheet = proofsheet;
 
                 order.Save();
                 order.Delete();
             }
             finally
             {
+                proofsheet.Delete();
+                paperType.Delete();
                 cp.Delete();
             }
         }

@@ -22,7 +22,7 @@ namespace TV.Model
         IPrintImplementation Implementation { get; set; }
         bool IsSpecimenSupplied { get; set; }
         bool IsPageCompositionSupplied { get; set; }
-        IProofsheet Proofsheets { get; set; }
+        IProofsheet Proofsheet { get; set; }
         IFinishingJob Finishing { get; set; }
         string Details { get; set; }
     }

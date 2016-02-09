@@ -90,9 +90,9 @@ namespace TV.ModelImpl {
         /// <summary>
         ///   Looks up a localized string similar to Paperformat &apos;{0}&apos; wasn&apos;t found..
         /// </summary>
-        internal static string PaperFormatNotFounf {
+        internal static string PaperFormatNotFound {
             get {
-                return ResourceManager.GetString("PaperFormatNotFounf", resourceCulture);
+                return ResourceManager.GetString("PaperFormatNotFound", resourceCulture);
             }
         }
     }

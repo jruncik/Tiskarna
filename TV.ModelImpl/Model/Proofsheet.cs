@@ -10,20 +10,32 @@ namespace TV.ModelImpl.Model
     {
         public Guid Id
         {
-            get { return _dbProofSheet.Id; }
-            set { _dbProofSheet.Id = value; }
+            get {
+                return _dbProofSheet.Id;
+            }
+            set {
+                _dbProofSheet.Id = value;
+            }
         }
 
         public DateTime Time
         {
-            get { return _dbProofSheet.Time; }
-            set { _dbProofSheet.Time = value; }
+            get {
+                return _dbProofSheet.Time;
+            }
+            set {
+                _dbProofSheet.Time = value;
+            }
         }
 
         public bool Passed
         {
-            get { return _dbProofSheet.Passed; }
-            set { _dbProofSheet.Passed = value; }
+            get {
+                return _dbProofSheet.Passed;
+            }
+            set {
+                _dbProofSheet.Passed = value;
+            }
         }
 
         public Proofsheet() :
@@ -44,21 +56,11 @@ namespace TV.ModelImpl.Model
                 {
                     try
                     {
-                        if (Id == Guid.Empty)
+                        using (AppliactionContext.Log.LogTime(this, $"Update proofsheet {Id}"))
                         {
-                            using (AppliactionContext.Log.LogTime(this, $"Save proofsheet."))
-                            {
-                                session.Save(_dbProofSheet);
-                            }
+                            session.SaveOrUpdate(_dbProofSheet);
+                            tx.Commit();
                         }
-                        else
-                        {
-                            using (AppliactionContext.Log.LogTime(this, $"Update proofsheet {Id}"))
-                            {
-                                session.Update(_dbProofSheet);
-                            }
-                        }
-                        tx.Commit();
                     }
                     catch (Exception ex)
                     {
@@ -84,8 +86,8 @@ namespace TV.ModelImpl.Model
 
                             _dbProofSheet.Time = reloadeDbProofsheet.Time;
                             _dbProofSheet.Passed = reloadeDbProofsheet.Passed;
+                            tx.Commit();
                         }
-                        tx.Commit();
                     }
                     catch (Exception ex)
                     {
@@ -108,8 +110,8 @@ namespace TV.ModelImpl.Model
                         using (AppliactionContext.Log.LogTime(this, $"Delete proofsheet {Id}"))
                         {
                             session.Delete(_dbProofSheet);
+                            tx.Commit();
                         }
-                        tx.Commit();
                     }
                     catch (Exception ex)
                     {
@@ -118,6 +120,13 @@ namespace TV.ModelImpl.Model
                         throw ex;
                     }
                 }
+            }
+        }
+
+        internal DbProofsheet DbProofsheet
+        {
+            get {
+                return _dbProofSheet;
             }
         }
 

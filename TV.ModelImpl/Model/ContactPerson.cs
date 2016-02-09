@@ -20,33 +20,53 @@ namespace TV.ModelImpl.Model
 
         public virtual Guid Id
         {
-            get { return _dbContactPerson.Id; }
-            set { _dbContactPerson.Id = value; }
+            get {
+                return _dbContactPerson.Id;
+            }
+            set {
+                _dbContactPerson.Id = value;
+            }
         }
 
         public virtual string FirstName
         {
-            get { return _dbContactPerson.FirstName; }
-            set { _dbContactPerson.FirstName = value; }
+            get {
+                return _dbContactPerson.FirstName;
+            }
+            set {
+                _dbContactPerson.FirstName = value;
+            }
         }
 
         public virtual string LastName
         {
-            get { return _dbContactPerson.LastName; }
-            set { _dbContactPerson.LastName = value; }
+            get {
+                return _dbContactPerson.LastName;
+            }
+            set {
+                _dbContactPerson.LastName = value;
+            }
 
         }
 
         public virtual string PhoneNumber
         {
-            get { return _dbContactPerson.PhoneNumber; }
-            set { _dbContactPerson.PhoneNumber = value; }
+            get {
+                return _dbContactPerson.PhoneNumber;
+            }
+            set {
+                _dbContactPerson.PhoneNumber = value;
+            }
         }
 
         public virtual string Email
         {
-            get { return _dbContactPerson.Email; }
-            set { _dbContactPerson.Email = value; }
+            get {
+                return _dbContactPerson.Email;
+            }
+            set {
+                _dbContactPerson.Email = value;
+            }
         }
 
         public void Save()
@@ -129,7 +149,9 @@ namespace TV.ModelImpl.Model
 
         internal DbContactPerson DbContactPerson
         {
-            get { return _dbContactPerson; }
+            get {
+                return _dbContactPerson;
+            }
         }
 
         private readonly DbContactPerson _dbContactPerson;

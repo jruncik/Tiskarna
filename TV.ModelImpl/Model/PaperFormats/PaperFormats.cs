@@ -23,6 +23,18 @@ namespace TV.ModelImpl.Model.PaperFormats
             get { return _paperFormats; }
         }
 
+        public IPaperFormat GetFormat(string name)
+        {
+            IPaperFormat paperFormat = TryFindPaperFormat(name);
+            if (paperFormat != null)
+            {
+                return paperFormat;
+            }
+
+            AppliactionContext.Log.Error(this, String.Format(Resources.PaperFormatAlreadyExist, paperFormat.Name));
+            throw new TvException(String.Format(Resources.PaperFormatNotFound, paperFormat.Name));
+        }
+
         public IPaperFormat AddFormat(string name, int width, int height)
         {
             CheckRights();

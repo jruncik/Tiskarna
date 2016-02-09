@@ -5,8 +5,14 @@ namespace TV.ModelImpl.Model
 {
     public class PrintImplementation : IPrintImplementation
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
+        public Guid Id
+        {
+            get; set;
+        }
+        public string Name
+        {
+            get; set;
+        }
 
         public void Delete()
         {

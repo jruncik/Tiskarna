@@ -63,12 +63,12 @@
     <Compile Include="DbModel\DbOrder.cs" />
     <Compile Include="DbModel\DbPaperFormat.cs" />
     <Compile Include="DbModel\DbPaperType.cs" />
+    <Compile Include="DbModel\DbPrintImplementation.cs" />
     <Compile Include="DbModel\DbProofsheet.cs" />
     <Compile Include="DbModel\DbRights.cs" />
     <Compile Include="Model\Aaa.cs" />
     <Compile Include="Model\Bbb.cs" />
     <Compile Include="Model\FinishingJobFlags.cs" />
-    <Compile Include="Model\PaperFormats\PaperFormatBuildin.cs" />
     <Compile Include="Model\ContactPerson.cs" />
     <Compile Include="Model\FinishingJob.cs" />
     <Compile Include="Model\PaperFormats\PaperFormats.cs" />
@@ -122,7 +122,9 @@
     <EmbeddedResource Include="DbModel\Mapping\DbFinishingJob.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DbModel\Mapping\DbOrder.hbm.xml" />
+    <EmbeddedResource Include="DbModel\Mapping\DbOrder.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DbModel\Mapping\DbProofsheet.hbm.xml" />
@@ -137,6 +139,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="DbModel\Mapping\DbBbb.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DbModel\Mapping\DbRpintImplementation.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Content Include="DbModel\Mapping\TV.sql" />

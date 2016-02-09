@@ -61,6 +61,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
@@ -70,6 +71,7 @@
     <Compile Include="ContactPersoneTests.cs" />
     <Compile Include="FinishingJobTests.cs" />
     <Compile Include="OrderTest.cs" />
+    <Compile Include="PaperTypeTests.cs" />
     <Compile Include="ProofsheetTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
